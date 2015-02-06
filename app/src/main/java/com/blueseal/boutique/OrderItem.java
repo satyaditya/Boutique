@@ -1,15 +1,22 @@
 package com.blueseal.boutique;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 
-public class MainActivity extends ActionBarActivity
+public class OrderItem extends Fragment
 {
-
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
+    {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.order_item_layout, container, false);
+    }
+   /* @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -39,5 +46,5 @@ public class MainActivity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

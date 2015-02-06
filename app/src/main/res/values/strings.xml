@@ -17,12 +17,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Titles -->
-    <string name="app_name">Animations Demo</string>
-    <string name="title_crossfade">Simple Crossfade</string>
-    <string name="title_card_flip">Card Flip</string>
-    <string name="title_screen_slide">Screen Slide</string>
-    <string name="title_zoom">Zoom</string>
-    <string name="title_layout_changes">Layout Changes</string>
+    <string name="app_name">Boutique</string>
+
     <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem
         Ipsum</string>
 
@@ -35,9 +31,9 @@
     <string name="action_finish">Finish</string>
     <string name="action_info">Photo info</string>
     <string name="action_photo">View photo</string>
-<string name="action_settings">Action</string>
+    <string name="action_settings">Action</string>
     <!-- Messages -->
-    <string name="message_empty_layout_changes">Add an item above to get started.</string>
+    <string name="message_empty_layout_changes">Add an item to the cart.</string>
     <string name="message_zoom_touch_expand">Touch a photo to expand it.</string>
 
     <!-- Accessibility-only descriptions -->
