@@ -36,7 +36,6 @@ import android.view.ViewGroup;
  * If the user performs activity on the order screen , the clickable view will be view flipped to show the order summary .
  * User will be able to delete or edit an existing order. Each clickable view opens a new fragment called an orderitem. There will be info passed to and fro between
  * the ordersummary and order item.
- *
  */
 public class OrderSummary extends Activity
 {
@@ -142,7 +141,7 @@ public class OrderSummary extends Activity
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             OrderItemFrag orderFrag = new OrderItemFrag();
-            fragmentTransaction.add(R.id.fragment_container, orderFrag).addToBackStack();
+            //   fragmentTransaction.add(R.id.fragment_container, orderFrag).addToBackStack();
 
             fragmentTransaction.commit();
 //            ViewFlipper viewFlipper = (ViewFlipper) v.findViewById(R.id.view_flipper);
