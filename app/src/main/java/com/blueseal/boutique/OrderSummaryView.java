@@ -20,7 +20,7 @@ public class OrderSummaryView extends View
     {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (inflater != null) {
-            //    inflater.inflate(R.layout.order_summary_layout, this);
+            //    inflater.inflate(R.layout.order_summary_layoutold, this);
         }
     }
 

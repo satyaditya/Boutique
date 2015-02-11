@@ -5,7 +5,7 @@ package com.blueseal.boutique;
  * An utility class that contains the information to be displayed as a part of the
  * order summary.
  */
-public final class OrderSummaryCreator
+public final class OrderSummaryUtil
 {
     private String orderName = "DUMMY";
     private String orderTimeStamp = "HH:MM:SS";

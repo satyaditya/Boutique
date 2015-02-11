@@ -1,20 +1,47 @@
 package com.blueseal.boutique;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Order Item Fragment contains the functionality for the user to create a new order.This fragment communicates with the @link orderSummary.java
+ * and displays the order summary depending on the content of the order.
+ * <p/>
+ * This fragment also contains functionality to update the database and to create a transaction to remote
+ */
 
-public class OrderItem extends Fragment
+
+
+public class OrderItemFrag extends Fragment //implements addOnBackStackChangedListener
 {
+    OnOrderItemUpdatedListener mListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.order_item_layout, container, false);
+    }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        try {
+            mListener = (OnOrderItemUpdatedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnOrderItemUpdatedListener");
+        }
+    }
+
+    public interface OnOrderItemUpdatedListener
+    {
+        public void OnOrderItemUpdated(Object obj);
     }
    /* @Override
     protected void onCreate(Bundle savedInstanceState)
