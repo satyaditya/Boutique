@@ -72,7 +72,8 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
                 return;
             }
             osFrag = new OrdersFrag();
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, osFrag).commit();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, osFrag).commit();
 
 
         }
@@ -108,8 +109,7 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
     {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // Navigate "up" the demo structure to the launchpad activity.
-                // See http://developer.android.com/design/patterns/navigation.html for more.
+
                 NavUtils.navigateUpTo(this, new Intent(this, OrderItemFrag.class));
                 return true;
 
@@ -146,7 +146,12 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
         mContainerView.addView(newView, 0);
     }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        // Save some state!
+    }
     /**
      * When the back button is pressed we should check the changes the data sent by the orderItemFragment
      * The summaryView has to be updated to show the order item information
@@ -171,16 +176,12 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
         @Override
         public void onClick(View v)
         {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             OrderItemFrag orderFrag = new OrderItemFrag();
-            fragmentTransaction.replace(R.id.fragment_container, orderFrag);
-            fragmentTransaction.addToBackStack("");
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-
-            fragmentTransaction.commit();
-//            ViewFlipper viewFlipper = (ViewFlipper) v.findViewById(R.id.view_flipper);
-//            viewFlipper.
+            fragmentTransaction.replace(R.id.fragment_container, orderFrag)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack("ORDER_SUMMARY")
+                    .commit();
 
         }
     }
