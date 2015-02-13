@@ -1,4 +1,4 @@
-package com.blueseal.boutique;
+package com.blueseal.boutique.cart;
 
 /**
  * Created by Satyaditya on 2/5/15.

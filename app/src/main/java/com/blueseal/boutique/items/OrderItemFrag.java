@@ -1,4 +1,4 @@
-package com.blueseal.boutique;
+package com.blueseal.boutique.items;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.blueseal.boutique.R;
 
 /**
  * Order Item Fragment contains the functionality for the user to create a new order.This fragment communicates with the @link orderSummary.java
