@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blueseal.boutique;
+package com.blueseal.boutique.cart;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -30,6 +30,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blueseal.boutique.R;
+import com.blueseal.boutique.items.OrderItemFrag;
+
 /**
  * This class contains the list of orders. Every time an user creates a new order a new view will be created
  * with a default message "create a new order". this view is clickable . Upon clicking this view the user will be taken to the order screen
@@ -37,7 +40,7 @@ import android.view.ViewGroup;
  * User will be able to delete or edit an existing order. Each clickable view opens a new fragment called an orderitem. There will be info passed to and fro between
  * the ordersummary and order item.
  */
-public class OrderSummary extends Activity
+public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemUpdatedListener
 {
     /**
      * A static list of country names.
@@ -48,32 +51,55 @@ public class OrderSummary extends Activity
             "Ukraine",
     };
     private final String tag = this.getClass().getCanonicalName();
+    OrdersFrag osFrag;
     /**
      * The container view which has layout change animations turned on. In this sample, this view
      * is a {@link android.widget.LinearLayout}.
      */
     private ViewGroup mContainerView;
-
+    private Activity mAct;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout_changes);
+        setContentView(R.layout.shop_cart_layout);
+        if (findViewById(R.id.fragment_container) != null) {
 
-        mContainerView = (ViewGroup) findViewById(R.id.container);
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+            osFrag = new OrdersFrag();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, osFrag).commit();
+
+
+        }
+
+
         ActionBar actionBar = this.getActionBar();
         if (actionBar != null) {
-            Log.d(tag, " action bar is not null .doing config");
+            Log.d(tag, " action bar is not null .configuring..");
             actionBar.setDisplayHomeAsUpEnabled(false);
 
         }
     }
 
     @Override
+    public void onStart()
+    {
+        super.onStart();
+        if (osFrag != null)
+            mContainerView = (ViewGroup) osFrag.getActivity().findViewById(R.id.container);
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.activity_layout_changes, menu);
+        getMenuInflater().inflate(R.menu.menu_neworder, menu);
         return true;
     }
 
@@ -131,6 +157,13 @@ public class OrderSummary extends Activity
         super.onBackPressed();
     }
 
+
+    @Override
+    public void OnOrderItemUpdated(Object obj)
+    {
+
+    }
+
     private class OrderViewUpdater implements View.OnClickListener
     {
         FragmentManager orderItemFrag;
@@ -141,7 +174,9 @@ public class OrderSummary extends Activity
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             OrderItemFrag orderFrag = new OrderItemFrag();
-            //   fragmentTransaction.add(R.id.fragment_container, orderFrag).addToBackStack();
+            fragmentTransaction.replace(R.id.fragment_container, orderFrag);
+            fragmentTransaction.addToBackStack("");
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
             fragmentTransaction.commit();
 //            ViewFlipper viewFlipper = (ViewFlipper) v.findViewById(R.id.view_flipper);
