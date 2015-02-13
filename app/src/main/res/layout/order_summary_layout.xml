@@ -9,12 +9,12 @@
 
     <ViewFlipper
         android:id="@+id/view_flipper"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="6dip">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <!-- Dummy text view that will display the name of a random country. -->
             <TextView
