@@ -40,6 +40,12 @@ public class OrderItemFrag extends Fragment //implements addOnBackStackChangedLi
         }
     }
 
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+    }
+
     public interface OnOrderItemUpdatedListener
     {
         public void OnOrderItemUpdated(Object obj);

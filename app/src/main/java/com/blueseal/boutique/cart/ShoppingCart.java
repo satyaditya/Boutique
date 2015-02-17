@@ -38,7 +38,7 @@ import com.blueseal.boutique.items.OrderItemFrag;
  * with a default message "create a new order". this view is clickable . Upon clicking this view the user will be taken to the order screen
  * If the user performs activity on the order screen , the clickable view will be view flipped to show the order summary .
  * User will be able to delete or edit an existing order. Each clickable view opens a new fragment called an orderitem. There will be info passed to and fro between
- * the ordersummary and order item.
+ * the order summary and order item.
  */
 public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemUpdatedListener
 {
@@ -52,6 +52,7 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
     };
     private final String tag = this.getClass().getCanonicalName();
     OrdersFrag osFrag;
+    private OrderDetails mOrder;
     /**
      * The container view which has layout change animations turned on. In this sample, this view
      * is a {@link android.widget.LinearLayout}.
@@ -85,6 +86,7 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
             actionBar.setDisplayHomeAsUpEnabled(false);
 
         }
+        mOrder = OrderDetails.getInstance();
     }
 
     @Override
@@ -93,6 +95,23 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
         super.onStart();
         if (osFrag != null)
             mContainerView = (ViewGroup) osFrag.getActivity().findViewById(R.id.container);
+
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        Log.d(tag, "on pause called ");
+
+    }
+
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        Log.d(tag, "on stop called ");
 
     }
 
@@ -141,7 +160,7 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
 
         // Because mContainerView has android:animateLayoutChanges set to true,
         // adding this view is automatically animated.
-        //  newView.findViewById(R.id.delete_button).setOnClickListener(new CancelOrder());
+        newView.findViewById(R.id.delete_button).setOnClickListener(new CancelOrder());
         newView.setOnClickListener(new OrderViewUpdater());
         mContainerView.addView(newView, 0);
     }
@@ -151,6 +170,9 @@ public class ShoppingCart extends Activity implements OrderItemFrag.OnOrderItemU
     {
         super.onSaveInstanceState(outState);
         // Save some state!
+        //save the no of rows created .
+        //save data for each row orderSummaryUtil object .
+        //recreate the same ui with the data depicting the order summary
     }
     /**
      * When the back button is pressed we should check the changes the data sent by the orderItemFragment
